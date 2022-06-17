@@ -108,7 +108,7 @@ namespace ProjetoCadastroUsuarioDDD.MVC.Controllers
         [HttpPost]
         public JsonResult Login(string login, string senha)
         {
-            if (login == "a" && senha == "a")
+            if (login == "SISTEMA" && senha == "candidato123")
             {
 
                 return Json(new { success = true });
