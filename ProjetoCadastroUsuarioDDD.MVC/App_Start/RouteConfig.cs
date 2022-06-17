@@ -17,7 +17,7 @@ namespace ProjetoCadastroUsuarioDDD.MVC
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Usuario", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Usuario", action = "login", id = UrlParameter.Optional }
 
             );
             

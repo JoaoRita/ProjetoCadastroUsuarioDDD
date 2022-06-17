@@ -43,7 +43,7 @@ namespace ProjetoCadastroUsuarioDDD.MVC.Controllers
         // GET: Usuario/Create
         public ActionResult Create()
         {
-            return View();
+            return Json(null);
         }
 
         // POST: Usuario/Create
