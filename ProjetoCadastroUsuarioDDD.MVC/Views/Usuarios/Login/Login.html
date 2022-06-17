@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html ng-app="loginUsuario">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../../Content/bootstrap.css" />
+    <style>
+        .jumbotron {
+            width: 500px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+
+        .table {
+            margin-top: 20px;
+        }
+
+        .form-control {
+            margin-bottom: 5px;
+        }
+    </style>
+    <script type="text/javascript" src="../../../Scripts/angular.js"></script>
+    <script>
+        angular.module("loginUsuario", [])
+        angular.module("loginUsuario").controller("loginUsuarioCtrl", function ($scope, $http) {
+            $scope.app = "Login"
+            $scope.logar = function (usuario) {
+                $http.post("https://localhost:44362/Usuarios/Login", usuario).then(function (data, status) {
+                    delete $scope.usuario;
+                    $scope.teste = data.data;
+                    $scope.resultado;
+                    if ($scope.teste.success == true) {
+                        javascript: onclick=window.location.href='https://localhost:44362/Views/Usuarios/Index/Index.html';
+                       
+                    } else {
+                        $scope.resultado = "Usuario ou senha incorreta";
+                    }
+                   
+                });
+            };
+        });
+    </script>
+</head>
+<body ng-controller="loginUsuarioCtrl">
+    <div class="jumbotron">
+        <h3>
+            {{app}}
+        </h3>  
+
+        <div>
+        {{resultado}}
+        </div>
+    <input class="form-control" type="text" ng-model="usuario.Login" placeholder="Nome do Usuario" />
+    <input class="form-control" type="text" ng-model="usuario.Senha" placeholder="Senha" />
+    <button class="btn btn-primary btn-block" ng-click="logar(usuario) ">Logar</button>
+    </div>
+
+</body>
+</html>

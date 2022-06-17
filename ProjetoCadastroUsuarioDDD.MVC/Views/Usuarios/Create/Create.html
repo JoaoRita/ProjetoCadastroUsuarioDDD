@@ -1,0 +1,48 @@
+﻿<!DOCTYPE html>
+<html ng-app="cadastraUsuario">
+<head>
+    <link rel="stylesheet" type="text/css" href="../../../Content/bootstrap.css" />
+    <style>
+        .jumbotron {
+            width: 400px;
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 20px;
+        }
+    </style>
+    <script type="text/javascript" src="../../../Scripts/angular.js"></script>
+    <script>
+        angular.module("cadastraUsuario", [])
+        angular.module("cadastraUsuario").controller("cadastroUsuarioCtrl", function ($scope, $http) {
+            $scope.app = "Cadastro Usuario"
+            $scope.adicionarUsuario = function (usuario) {
+                var xhttp = new XMLHttpRequest();
+                $http.post("https://localhost:44362/Usuarios/Create", usuario).then(function (data, status) {
+                    $scope.teste = data.data;
+                    $scope.resultado;
+                    if ($scope.teste.success == true) {
+                        javascript: onclick = window.location.href = 'https://localhost:44362/Views/Usuarios/Index/Index.html';
+
+                    }
+                    delete $scope.usuario;
+                });
+            };
+        });
+    </script>
+</head>
+<body ng-controller="cadastroUsuarioCtrl">
+    <div class="jumbotron">
+        <h3>
+            {{app}}
+        </h3>
+        <div>{{teste.errors[0]}}</div>
+        <input class="form-control" type="text" ng-model="usuario.Nome" placeholder="Nome" />
+        <div>{{teste.errors[1]}}</div>
+        <input class="form-control" type="text" ng-model="usuario.CPF" placeholder="CPF" />
+        <input class="form-control" type="text" ng-model="usuario.Endereco" placeholder="Endereco" />
+        <input class="form-control" type="text" ng-model="usuario.Telefone" placeholder="Telefone" />
+        <button class="btn btn-primary btn-block" ng-click="adicionarUsuario(usuario) ">Adicionar Contato</button>
+    </div>
+</body>
+</html>

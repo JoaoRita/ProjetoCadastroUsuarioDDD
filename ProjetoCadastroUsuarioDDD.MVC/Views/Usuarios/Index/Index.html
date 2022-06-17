@@ -1,0 +1,70 @@
+﻿    <!DOCTYPE html>
+    <html ng-app="listaUsuario">
+    <head>
+
+        }
+        <link rel="stylesheet" type="text/css" href="../../../Content/bootstrap.css"/>
+        <style>
+            .jumbotron {
+                width: 500px;
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                margin-top: 20px;
+            }
+
+            .table {
+                margin-top: 20px;
+            }
+
+            .form-control {
+                margin-bottom: 5px;
+            }
+        </style>
+        <script type="text/javascript" src="../../../Scripts/angular.js"></script>
+        <script>
+            angular.module("listaUsuario", [])
+            angular.module("listaUsuario").controller("listaUsuarioCtrl", function ($scope, $http,) {
+
+                $scope.app = "Lista Usuario";
+               
+               
+                var carregarUsuarios= function () {
+
+                    $http.get("https://localhost:44362/Usuarios/Index").then(function (data, status) {
+                        $scope.usuarios = data.data;
+
+                        console.log($scope.usuarios);
+                        
+                        
+                    });
+                };
+                carregarUsuarios();
+            });
+
+        </script>
+
+
+    </head>
+    <body ng-controller="listaUsuarioCtrl">
+        <div class="jumbotron">
+            <h3>{{app}}</h3>
+            <button class="btn btn-primary btn-block" ng-click="adicionarUsuario(usuario) " onclick="window.location.href = 'https://localhost:44362/Views/Usuarios/Create/Create.html'">Adicionar Contato</button>
+            <table class="table table-striped">
+                <tr>
+                    <th>Nome</th>
+                    <th>Cpf</th>
+                    <th>Endereço</th>
+                    <th>Telefone</th>
+                </tr>
+
+                <tr ng-repeat="usuario in usuarios">
+                    <td>{{usuario.Nome}}</td>
+                    <td>{{usuario.CPF}}</td>
+                    <td>{{usuario.Endereco}}</td>
+                    <td>{{usuario.Telefone}}</td>
+                </tr>
+            </table>
+        </div>
+    </body>
+</html>
